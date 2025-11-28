@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+    --font-sans: 'Nunito', sans-serif;
+}
+
+.custom-container {
+    @apply max-w-[1440px] mx-auto px-4;
+}
+* {
+    box-sizing: border-box;
+}
+body, html {
+    @apply bg-gray-50;
+}
+
+.nuxt-ui-component {
+    background-color: transparent !important;
+}
+
+h1, h2 {
+    @apply text-center text-3xl text-black italic mb-8
+}
+
+p {
+    @apply leading-relaxed text-black font-normal;
+}
+
+footer {
+    @apply bg-gray-200 w-full p-10;
+}
+
+.footer-cols {
+    @apply w-full flex flex-col items-center justify-center h-full;
+}
+
+.container-glass {
+    @apply bg-white/30 backdrop-blur-md rounded-xl shadow-lg p-6;
+}
+
+.contacts-us-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.uInput {
+    @apply w-full;
+}
+
+.form-control {
+    @apply flex flex-col items-start justify-start w-full;
+}
+
+.form-container {
+    @apply flex flex-col items-center justify-start gap-5;
+}
+
+.scroll-section {
+    @apply relative overflow-hidden;
+}
+
+.cards-container {
+    @apply w-full h-screen flex flex-nowrap items-center justify-start px-10;
+}
+
+.heading {
+    flex: 1 0 35%;
+}
+
+.card {
+    height: 70%;
+    flex: 1 0 50%;
+    margin-right: 50px;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.card:last-child {
+    margin-right: 0;
+}
+
+card:nth-child(3) {
+    object-position: 30% 50%;
+}
+
+@media (max-width: 435px) {
+    .cards-container {
+        padding: 0 25px;
+    }
+    .heading {
+        flex: 1 0 40%;
+    }
+    .card {
+        margin-right: 30px;
+    }
+
+    .heading h1 {
+        margin: 0 30px 0 10px;
+    }
+}
+
