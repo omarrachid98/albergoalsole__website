@@ -138,12 +138,17 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     <!-- MOBILE MENU -->
     <div
         class="md:hidden fixed top-0 left-0 right-0 z-40 flex justify-center pt-3">
-      <div
-          ref="logoRef"
-          class="backdrop-blur-md bg-white/70 px-6 py-2 rounded-full shadow-lg
-           text-lg font-bold italic text-gray-900"
-      >
-        Albergo Al Sole
+      <div class="flex items-center justify-start w-full px-4">
+        <div
+            ref="logoRef"
+            class="backdrop-blur-md bg-white/70 px-6 py-2 rounded-full shadow-lg"
+        >
+          <p class="text-lg font-bold italic text-center text-gray-900">Albergo Al Sole</p>
+        </div>
+
+        <div class="backdrop-blur-md cursor-pointer bg-white/70 px-6 py-2 rounded-full shadow-lg ml-auto">
+          <Icon name="uil:envelopes" size="25" style="color: black" />
+        </div>
       </div>
     </div>
 
