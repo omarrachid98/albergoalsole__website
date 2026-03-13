@@ -1,21 +1,31 @@
 <template>
-  <section class="px-6 py-16 max-w-6xl mx-auto">
-    <h1 class="text-4xl font-bold mb-10 text-center">Galleria</h1>
-    <div ref="gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <section class="px-4 md:px-6 py-16 max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4 text-center">Galleria</h1>
+    <p class="text-center text-gray-500 mb-12 max-w-lg mx-auto">Scopri gli spazi del nostro hotel e ristorante a Lusiana Conco, sull'Altopiano di Asiago</p>
+
+    <div ref="gallery" class="grid grid-cols-2 md:grid-cols-4 auto-rows-[160px] md:auto-rows-[180px] gap-3 md:gap-4">
       <div
         v-for="(img, i) in images"
         :key="i"
-        class="overflow-hidden rounded-3xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300"
+        class="overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 group"
+        :class="img.span"
+        @click="openLightbox(i)"
       >
-        <NuxtImg
-          @click="openLightbox(i)"
-          :src="img.src"
-          :alt="img.alt"
-          class="w-full h-64 object-cover gallery-item transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-          width="800"
-          height="600"
-        />
+        <div class="relative overflow-hidden w-full h-full">
+          <NuxtImg
+            :src="img.src"
+            :alt="img.alt"
+            class="w-full h-full object-cover gallery-item transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            width="800"
+            height="600"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end">
+            <span class="text-white text-sm font-medium px-4 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow">
+              {{ img.label }}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -26,28 +36,55 @@
         role="dialog"
         aria-modal="true"
         aria-label="Visualizzazione immagine"
-        class="fixed inset-0 backdrop-blur-md bg-black/30 flex items-center justify-center z-50"
+        class="fixed inset-0 backdrop-blur-md bg-black/50 flex items-center justify-center z-50"
         @click.self="closeLightbox"
         @keydown.escape="closeLightbox"
+        @keydown.left="prevImage"
+        @keydown.right="nextImage"
         tabindex="0"
         ref="lightboxRef"
       >
-        <div class="relative p-4 flex items-center justify-center">
-          <div ref="popupRef" class="relative glass-strong p-4 rounded-3xl shadow-2xl max-w-2xl w-[90vw]">
+        <div class="relative p-4 flex items-center justify-center max-w-3xl w-[92vw]">
+          <div ref="popupRef" class="relative glass-strong p-3 rounded-2xl shadow-2xl w-full">
             <NuxtImg
               :src="activeImage.src"
               :alt="activeImage.alt"
-              class="w-full h-auto rounded-2xl"
+              class="w-full h-auto rounded-xl"
             />
+            <p class="text-center text-sm text-gray-600 mt-3 mb-1">{{ activeImage.label }}</p>
           </div>
+
+          <!-- Close -->
           <button
             @click="closeLightbox"
             aria-label="Chiudi immagine"
-            class="absolute -top-4 -right-2 md:top-0 md:-right-4 backdrop-blur-md cursor-pointer
-                   bg-white/80 w-10 h-10 rounded-full shadow-lg flex items-center justify-center
-                   text-gray-700 hover:bg-white transition-colors text-xl"
+            class="absolute -top-2 -right-2 md:-top-4 md:-right-4 backdrop-blur-md cursor-pointer
+                   bg-white/80 w-9 h-9 rounded-full shadow-lg flex items-center justify-center
+                   text-gray-700 hover:bg-white transition-colors text-lg"
           >
             &times;
+          </button>
+
+          <!-- Prev -->
+          <button
+            @click="prevImage"
+            aria-label="Immagine precedente"
+            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 backdrop-blur-md cursor-pointer
+                   bg-white/80 w-9 h-9 rounded-full shadow-lg flex items-center justify-center
+                   text-gray-700 hover:bg-white transition-colors"
+          >
+            &#8249;
+          </button>
+
+          <!-- Next -->
+          <button
+            @click="nextImage"
+            aria-label="Immagine successiva"
+            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 backdrop-blur-md cursor-pointer
+                   bg-white/80 w-9 h-9 rounded-full shadow-lg flex items-center justify-center
+                   text-gray-700 hover:bg-white transition-colors"
+          >
+            &#8250;
           </button>
         </div>
       </div>
@@ -72,22 +109,39 @@ useHead({
 });
 
 const images = [
-  { src: 'https://picsum.photos/id/1015/800/600', alt: 'Vista panoramica delle montagne dall\'Altopiano di Asiago' },
-  { src: 'https://picsum.photos/id/1025/800/600', alt: 'Paesaggio naturale vicino all\'hotel a Lusiana Conco' },
-  { src: 'https://picsum.photos/id/1035/800/600', alt: 'Area relax dell\'albergo Al Sole' },
-  { src: 'https://picsum.photos/id/1045/800/600', alt: 'Ristorante e spazi comuni dell\'hotel' },
-  { src: 'https://picsum.photos/id/1055/800/600', alt: 'Camera dell\'albergo Al Sole a Lusiana Conco' },
-  { src: 'https://picsum.photos/id/1065/800/600', alt: 'Terrazza panoramica con vista sull\'Altopiano di Asiago' },
+  // Facciata grande + ristorante portrait
+  { src: '/images/gallery/al_sole_front1.jpg', alt: `${SITE.name} - Facciata dell'hotel a ${SITE.address.locality}`, label: 'Facciata', span: 'col-span-2 row-span-2' },
+  { src: '/images/gallery/alsole_ristorante.jpg', alt: `Ristorante dell'${SITE.name} a ${SITE.address.locality}`, label: 'Ristorante', span: 'row-span-3' },
+  { src: '/images/gallery/alsole_bar.jpg', alt: `Bar dell'${SITE.name}`, label: 'Bar', span: 'row-span-1' },
+  // 
+  { src: '/images/gallery/alsole_terrazza.jpg', alt: `Terrazza dell'${SITE.name} con vista sull'Altopiano di Asiago`, label: 'Terrazza panoramica', span: 'row-span-1' },
+  { src: '/images/gallery/alsole_ristorante2.jpg', alt: `Sala ristorante dell'${SITE.name}`, label: 'Sala ristorante', span: 'col-span-2 row-span-1' },
+  { src: '/images/gallery/alsole_bar2.jpg', alt: `Area bar dell'hotel a ${SITE.address.locality}`, label: 'Area bar', span: 'row-span-1' },
+  // Camere mix
+  { src: '/images/gallery/alsole_stanza.jpg', alt: `Camera dell'${SITE.name} - Hotel a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
+  { src: '/images/gallery/alsole_stanza2.jpg', alt: `Camera doppia dell'${SITE.name}`, label: 'Camera doppia', span: 'col-span-2 row-span-2' },
+  { src: '/images/gallery/alsole_stanza3.jpg', alt: `Camera dell'albergo a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
+  //
+  { src: '/images/gallery/alsole_stanza4.jpg', alt: `Camera con vista dell'${SITE.name}`, label: 'Camera con vista', span: 'row-span-1' },
+  { src: '/images/gallery/alsole_stanza5.jpg', alt: `Camera dell'hotel sull'Altopiano di Asiago`, label: 'Camera', span: 'row-span-1' },
+  //
+  { src: '/images/gallery/alsole_stanza7.jpg', alt: `Camera accogliente dell'${SITE.name}`, label: 'Camera', span: 'col-span-2 row-span-2' },
+  { src: '/images/gallery/alsole_stanza8.jpg', alt: `Camera arredata dell'${SITE.name} a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
+  { src: '/images/gallery/alsole_bagno.jpg', alt: `Bagno dell'${SITE.name}`, label: 'Bagno', span: 'row-span-1' },
+  //
+  { src: '/images/gallery/alsole_bagno3.jpg', alt: `Bagno con doccia dell'hotel a ${SITE.address.locality}`, label: 'Bagno con doccia', span: 'row-span-1' },
+  { src: '/images/gallery/alsole_parcheggio.jpg', alt: `Parcheggio gratuito dell'${SITE.name}`, label: 'Parcheggio', span: 'col-span-2 row-span-1' },
 ];
 
 const gallery = ref<HTMLElement | null>(null);
 const lightboxOpen = ref(false);
-const activeImage = ref<{ src: string; alt: string } | null>(null);
+const activeIndex = ref(0);
+const activeImage = computed(() => lightboxOpen.value ? images[activeIndex.value] : null);
 const popupRef = ref<HTMLElement | null>(null);
 const lightboxRef = ref<HTMLElement | null>(null);
 
 async function openLightbox(index: number) {
-  activeImage.value = images[index];
+  activeIndex.value = index;
   lightboxOpen.value = true;
   await nextTick();
   lightboxRef.value?.focus();
@@ -96,10 +150,18 @@ async function openLightbox(index: number) {
   if (popupRef.value) {
     gsap.fromTo(
       popupRef.value,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' }
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out' }
     );
   }
+}
+
+function prevImage() {
+  activeIndex.value = (activeIndex.value - 1 + images.length) % images.length;
+}
+
+function nextImage() {
+  activeIndex.value = (activeIndex.value + 1) % images.length;
 }
 
 async function closeLightbox() {
@@ -107,17 +169,15 @@ async function closeLightbox() {
   if (popupRef.value) {
     gsap.to(popupRef.value, {
       opacity: 0,
-      scale: 0.8,
-      duration: 0.3,
+      scale: 0.9,
+      duration: 0.25,
       ease: 'power3.in',
       onComplete: () => {
         lightboxOpen.value = false;
-        activeImage.value = null;
       },
     });
   } else {
     lightboxOpen.value = false;
-    activeImage.value = null;
   }
 }
 

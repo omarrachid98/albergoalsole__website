@@ -62,20 +62,27 @@ p {
 }
 
 .cards-container {
-    @apply w-full h-screen flex flex-nowrap items-center justify-start px-10;
+    @apply w-full flex flex-nowrap items-center justify-start px-10;
+    height: 75vh;
 }
 
 .heading {
-    flex: 1 0 35%;
+    flex: 1 0 30%;
 }
 
 .card {
     height: 70%;
-    flex: 1 0 50%;
-    margin-right: 50px;
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    flex: 1 0 25%;
+    margin-right: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
@@ -91,23 +98,20 @@ p {
 
 @media (max-width: 620px) {
     .cards-container {
-        padding: 0 35px;
+        padding: 0 24px;
+        height: 65vh;
     }
     .heading {
-        flex: 1 0 55%;
+        flex: 1 0 50%;
     }
     .card {
-        margin-right: 30px;
-        flex: 1 0 70%;
-        height: 50%;
+        margin-right: 16px;
+        flex: 1 0 50%;
+        height: 60%;
     }
 
     .heading h2 {
-        margin: 0 30px 0 10px;
-    }
-
-    .card:nth-child(3) img {
-        object-position: 30% 50%;
+        margin: 0 20px 0 10px;
     }
 }
 
@@ -116,10 +120,10 @@ p {
         flex: 1 0 40%;
     }
     .card {
-        margin-right: 20px;
+        margin-right: 14px;
     }
 
     .heading h2 {
-        margin: 0 20px 0 5px;
+        margin: 0 14px 0 5px;
     }
 }
