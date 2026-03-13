@@ -29,7 +29,6 @@
       </div>
     </div>
 
-    <!-- Lightbox -->
     <Teleport to="body">
       <div
         v-if="lightboxOpen && activeImage"
@@ -54,7 +53,6 @@
             <p class="text-center text-sm text-gray-600 mt-3 mb-1">{{ activeImage.label }}</p>
           </div>
 
-          <!-- Close -->
           <button
             @click="closeLightbox"
             aria-label="Chiudi immagine"
@@ -65,7 +63,6 @@
             &times;
           </button>
 
-          <!-- Prev -->
           <button
             @click="prevImage"
             aria-label="Immagine precedente"
@@ -76,7 +73,6 @@
             &#8249;
           </button>
 
-          <!-- Next -->
           <button
             @click="nextImage"
             aria-label="Immagine successiva"
@@ -109,26 +105,20 @@ useHead({
 });
 
 const images = [
-  // Facciata grande + ristorante portrait
   { src: '/images/gallery/al_sole_front1.jpg', alt: `${SITE.name} - Facciata dell'hotel a ${SITE.address.locality}`, label: 'Facciata', span: 'col-span-2 row-span-2' },
   { src: '/images/gallery/alsole_ristorante.jpg', alt: `Ristorante dell'${SITE.name} a ${SITE.address.locality}`, label: 'Ristorante', span: 'row-span-3' },
   { src: '/images/gallery/alsole_bar.jpg', alt: `Bar dell'${SITE.name}`, label: 'Bar', span: 'row-span-1' },
-  // 
   { src: '/images/gallery/alsole_terrazza.jpg', alt: `Terrazza dell'${SITE.name} con vista sull'Altopiano di Asiago`, label: 'Terrazza panoramica', span: 'row-span-1' },
   { src: '/images/gallery/alsole_ristorante2.jpg', alt: `Sala ristorante dell'${SITE.name}`, label: 'Sala ristorante', span: 'col-span-2 row-span-1' },
   { src: '/images/gallery/alsole_bar2.jpg', alt: `Area bar dell'hotel a ${SITE.address.locality}`, label: 'Area bar', span: 'row-span-1' },
-  // Camere mix
   { src: '/images/gallery/alsole_stanza.jpg', alt: `Camera dell'${SITE.name} - Hotel a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
   { src: '/images/gallery/alsole_stanza2.jpg', alt: `Camera doppia dell'${SITE.name}`, label: 'Camera doppia', span: 'col-span-2 row-span-2' },
   { src: '/images/gallery/alsole_stanza3.jpg', alt: `Camera dell'albergo a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
-  //
   { src: '/images/gallery/alsole_stanza4.jpg', alt: `Camera con vista dell'${SITE.name}`, label: 'Camera con vista', span: 'row-span-1' },
   { src: '/images/gallery/alsole_stanza5.jpg', alt: `Camera dell'hotel sull'Altopiano di Asiago`, label: 'Camera', span: 'row-span-1' },
-  //
   { src: '/images/gallery/alsole_stanza7.jpg', alt: `Camera accogliente dell'${SITE.name}`, label: 'Camera', span: 'col-span-2 row-span-2' },
   { src: '/images/gallery/alsole_stanza8.jpg', alt: `Camera arredata dell'${SITE.name} a ${SITE.address.locality}`, label: 'Camera', span: 'row-span-3' },
   { src: '/images/gallery/alsole_bagno.jpg', alt: `Bagno dell'${SITE.name}`, label: 'Bagno', span: 'row-span-1' },
-  //
   { src: '/images/gallery/alsole_bagno3.jpg', alt: `Bagno con doccia dell'hotel a ${SITE.address.locality}`, label: 'Bagno con doccia', span: 'row-span-1' },
   { src: '/images/gallery/alsole_parcheggio.jpg', alt: `Parcheggio gratuito dell'${SITE.name}`, label: 'Parcheggio', span: 'col-span-2 row-span-1' },
 ];

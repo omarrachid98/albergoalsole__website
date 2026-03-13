@@ -96,7 +96,6 @@
 
 <template>
   <div class="bg-white/80 backdrop-blur-md border border-gray-200 rounded-3xl p-8 shadow-lg">
-    <!-- Success state -->
     <div v-if="submitted" class="text-center py-8">
       <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
         <Icon name="uil:check" size="32" class="text-green-600" />
@@ -108,9 +107,7 @@
       </UButton>
     </div>
 
-    <!-- Form -->
     <UForm v-else :validate="validateForm" :state="formData" :schema="schema" class="form-container" @submit="onSubmit">
-      <!-- Honeypot: hidden from humans, bots will fill it -->
       <div aria-hidden="true" style="position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden;">
         <label for="website">Sito web</label>
         <input id="website" v-model="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" />

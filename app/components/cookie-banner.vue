@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const accepted = ref(true); // default true to avoid flash on SSR
+const accepted = ref(true);
 
 onMounted(() => {
   accepted.value = localStorage.getItem('cookie-consent') === 'true';

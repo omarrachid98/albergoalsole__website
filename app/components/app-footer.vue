@@ -5,16 +5,12 @@ import { SITE } from '~/constants/site';
 <template>
   <footer class="bg-brand/95 backdrop-blur-md text-white py-12 mt-16 rounded-t-[3rem]">
     <div class="custom-container grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-
-      <!-- Brand -->
       <div class="flex flex-col items-center">
         <h3 class="text-2xl font-bold mb-4 italic text-white">{{ SITE.name }}</h3>
         <p class="text-white">Hotel e ristorante a {{ SITE.address.locality }}, sull'Altopiano di Asiago. Dal {{ SITE.since }}, accoglienza e comfort tra le Prealpi Venete.</p>
         <p class="mt-2 text-white/70">&copy; {{ new Date().getFullYear() }} {{ SITE.name }}. Tutti i diritti riservati.</p>
         <p class="mt-1 text-white/70 text-sm">P.IVA 03275120248</p>
       </div>
-
-      <!-- Contatti -->
       <div class="flex flex-col items-center">
         <h4 class="text-lg font-semibold mb-4 text-white">Contatti</h4>
         <ul class="text-white space-y-2">
@@ -32,8 +28,6 @@ import { SITE } from '~/constants/site';
           </li>
         </ul>
       </div>
-
-      <!-- Links -->
       <div class="flex flex-col items-center">
         <h4 class="text-lg font-semibold mb-4 text-white">Scopri</h4>
         <ul class="space-y-2 text-white">
@@ -43,7 +37,6 @@ import { SITE } from '~/constants/site';
           <li><NuxtLink to="/privacy" class="hover:text-white/80 transition-colors">Privacy</NuxtLink></li>
         </ul>
       </div>
-
     </div>
   </footer>
 </template>

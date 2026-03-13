@@ -67,7 +67,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
 </script>
 
 <template>
-  <!-- Desktop top info bar -->
   <div
     :class="[
       'hidden md:block w-full bg-brand text-white text-sm transition-all duration-500 overflow-hidden',
@@ -102,8 +101,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       </div>
     </div>
   </div>
-
-  <!-- Desktop header -->
   <header
     :class="[
       'sticky top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out hidden md:block',
@@ -112,7 +109,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
         : 'w-full bg-transparent px-4 py-6'
     ]"
   >
-    <!-- Non-scrolled: single row -->
     <div v-if="!scrolled" class="flex items-center justify-between">
       <NuxtLink
         to="/"
@@ -137,10 +133,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
         </NuxtLink>
       </nav>
     </div>
-
-    <!-- Scrolled: 3 separate glass bubbles -->
     <div v-else class="flex items-center justify-between gap-3">
-      <!-- Bubble 1: Logo -->
       <NuxtLink
         to="/"
         class="bg-white/60 backdrop-blur-md rounded-full shadow-xl border border-white/30 px-6 py-2.5
@@ -148,8 +141,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       >
         {{ SITE.name }}
       </NuxtLink>
-
-      <!-- Bubble 2: Navigation -->
       <nav
         aria-label="Navigazione principale"
         class="bg-white/60 backdrop-blur-md rounded-full shadow-xl border border-white/30 px-6 py-2.5
@@ -165,8 +156,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
           {{ item.title }}
         </NuxtLink>
       </nav>
-
-      <!-- Bubble 3: Location -->
       <a
         :href="SITE.mapsUrl"
         target="_blank"
@@ -181,7 +170,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     </div>
   </header>
 
-  <!-- Mobile top bar -->
   <div class="md:hidden fixed top-0 left-0 right-0 z-40 flex justify-center pt-3">
     <div class="flex items-center justify-start w-full px-4 gap-2">
       <NuxtLink
@@ -192,7 +180,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       </NuxtLink>
 
       <div class="ml-auto flex items-center gap-2">
-        <!-- Location pill -->
         <a
           :href="SITE.mapsUrl"
           target="_blank"
@@ -214,8 +201,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       </div>
     </div>
   </div>
-
-  <!-- Mobile floating bubble -->
   <div class="md:hidden fixed bottom-6 right-6 z-50">
     <button
       ref="bubbleRef"
@@ -230,8 +215,6 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       <span v-if="!isMenuOpen" class="text-3xl leading-none">&#9776;</span>
       <span v-else class="text-2xl leading-none">&#10005;</span>
     </button>
-
-    <!-- Dropdown nav -->
     <nav
       v-if="isMenuOpen"
       ref="menuRef"

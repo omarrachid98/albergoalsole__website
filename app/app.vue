@@ -1,12 +1,10 @@
 <template>
   <UApp>
-    <!-- Scroll progress bar -->
     <div
       class="fixed top-0 left-0 h-[3px] bg-brand z-[9999] transition-none"
       :style="{ width: scrollProgress + '%' }"
     />
 
-    <!-- Splash screen: rendered by SSR, visible immediately, fades out after hydration -->
     <Transition name="splash">
       <div
         v-if="showSplash"
