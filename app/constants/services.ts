@@ -4,7 +4,7 @@ export const SERVICES: Array<ServicesTypes> = [
   {
     id: 0,
     title: "Wi-Fi gratuito",
-    description: "Connessione Wi-Fi veloce e gratuita in tutto l'hotel, per restare connessi durante il soggiorno a Lusiana Conco.",
+    description: "Connessione Wi-Fi veloce e gratuita, per restare connessi durante il soggiorno a Lusiana Conco.",
     icon: "uil:wifi",
   },
   {

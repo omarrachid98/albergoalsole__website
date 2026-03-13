@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Hero -->
     <div class="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
       <NuxtImg
         :src="SITE.heroImage"
@@ -10,12 +9,9 @@
         width="1200"
         height="800"
       />
-      <!-- Dark overlay -->
       <div class="absolute inset-0 bg-black/40" />
-      <!-- Bottom fade to page background -->
       <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-50 to-transparent" />
 
-      <!-- Hero content -->
       <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
         <h1 class="sr-only">{{ SITE.name }} - Hotel e ristorante a {{ SITE.address.locality }}</h1>
         <p class="text-2xl md:text-4xl lg:text-5xl font-bold underline italic text-white drop-shadow-lg max-w-2xl leading-tight">
@@ -45,7 +41,7 @@
       <FeaturesImageGallery />
 
       <div id="contatti">
-        <h2>Contatta il nostro hotel per prenotazioni e informazioni</h2>
+        <h2>Contattaci per prenotazioni e informazioni</h2>
         <FeaturesContactsUs />
       </div>
     </div>
@@ -69,7 +65,6 @@
     ogUrl: SITE.url,
   });
 
-  // JSON-LD structured data: LodgingBusiness + Restaurant
   const addressSchema = {
     '@type': 'PostalAddress',
     streetAddress: SITE.address.street,
