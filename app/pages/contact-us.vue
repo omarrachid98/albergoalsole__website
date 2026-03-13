@@ -2,10 +2,10 @@
   import { SITE } from '~/constants/site';
 
   useSeoMeta({
-    title: `Contattaci | ${SITE.name}`,
+    title: `Contattaci | ${SITE.name} - Hotel e Ristorante a ${SITE.address.locality}`,
     ogTitle: `Contattaci | ${SITE.name}`,
-    description: `Contatta l'${SITE.name} per informazioni, prenotazioni e richieste. Siamo a ${SITE.address.locality}, sull'Altopiano di Asiago.`,
-    ogDescription: `Contatta l'${SITE.name} per informazioni, prenotazioni e richieste. Siamo a ${SITE.address.locality}, sull'Altopiano di Asiago.`,
+    description: `Contatta l'${SITE.name} per prenotazioni e informazioni. Hotel e ristorante a ${SITE.address.locality}, Altopiano di Asiago. Telefono: ${SITE.phone}, Email: ${SITE.email}.`,
+    ogDescription: `Contatta l'${SITE.name} per prenotazioni e informazioni. Hotel e ristorante a ${SITE.address.locality}, Altopiano di Asiago.`,
     ogImage: SITE.ogImage,
     ogUrl: `${SITE.url}/contact-us`,
   });

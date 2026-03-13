@@ -2,9 +2,9 @@
 import { SITE } from '~/constants/site';
 
 useSeoMeta({
-  title: `Informativa sulla Privacy | ${SITE.name}`,
+  title: `Informativa sulla Privacy | ${SITE.name} - Hotel a ${SITE.address.locality}`,
   ogTitle: `Informativa sulla Privacy | ${SITE.name}`,
-  description: `Informativa sulla privacy dell'${SITE.name}. Scopri come trattiamo i tuoi dati personali.`,
+  description: `Informativa sulla privacy dell'${SITE.name}, hotel e ristorante a ${SITE.address.locality}. Scopri come trattiamo i tuoi dati personali ai sensi del GDPR.`,
   ogDescription: `Informativa sulla privacy dell'${SITE.name}. Scopri come trattiamo i tuoi dati personali.`,
   ogImage: SITE.ogImage,
   ogUrl: `${SITE.url}/privacy`,

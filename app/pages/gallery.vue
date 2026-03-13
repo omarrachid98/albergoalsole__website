@@ -59,10 +59,10 @@
 import { SITE } from '~/constants/site';
 
 useSeoMeta({
-  title: `Galleria | ${SITE.name}`,
+  title: `Galleria Fotografica | ${SITE.name} - Hotel a ${SITE.address.locality}`,
   ogTitle: `Galleria | ${SITE.name}`,
-  description: `Scopri le foto dell'${SITE.name}: camere, spazi comuni, terrazza panoramica e i paesaggi dell'Altopiano di Asiago.`,
-  ogDescription: `Scopri le foto dell'${SITE.name}: camere, spazi comuni, terrazza panoramica e i paesaggi dell'Altopiano di Asiago.`,
+  description: `Galleria fotografica dell'${SITE.name}, hotel e ristorante a ${SITE.address.locality}. Scopri le camere, il ristorante, la terrazza panoramica e i paesaggi dell'Altopiano di Asiago.`,
+  ogDescription: `Scopri le foto dell'${SITE.name}: camere, ristorante, terrazza panoramica e i paesaggi dell'Altopiano di Asiago.`,
   ogImage: SITE.ogImage,
   ogUrl: `${SITE.url}/gallery`,
 });
@@ -72,12 +72,12 @@ useHead({
 });
 
 const images = [
-  { src: 'https://picsum.photos/id/1015/800/600', alt: 'Vista panoramica delle montagne' },
-  { src: 'https://picsum.photos/id/1025/800/600', alt: 'Paesaggio naturale' },
-  { src: 'https://picsum.photos/id/1035/800/600', alt: 'Area relax dell\'hotel' },
-  { src: 'https://picsum.photos/id/1045/800/600', alt: 'Spazi comuni dell\'hotel' },
-  { src: 'https://picsum.photos/id/1055/800/600', alt: 'Camera dell\'hotel' },
-  { src: 'https://picsum.photos/id/1065/800/600', alt: 'Terrazza panoramica' },
+  { src: 'https://picsum.photos/id/1015/800/600', alt: 'Vista panoramica delle montagne dall\'Altopiano di Asiago' },
+  { src: 'https://picsum.photos/id/1025/800/600', alt: 'Paesaggio naturale vicino all\'hotel a Lusiana Conco' },
+  { src: 'https://picsum.photos/id/1035/800/600', alt: 'Area relax dell\'albergo Al Sole' },
+  { src: 'https://picsum.photos/id/1045/800/600', alt: 'Ristorante e spazi comuni dell\'hotel' },
+  { src: 'https://picsum.photos/id/1055/800/600', alt: 'Camera dell\'albergo Al Sole a Lusiana Conco' },
+  { src: 'https://picsum.photos/id/1065/800/600', alt: 'Terrazza panoramica con vista sull\'Altopiano di Asiago' },
 ];
 
 const gallery = ref<HTMLElement | null>(null);

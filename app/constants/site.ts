@@ -6,8 +6,8 @@
 
 export const SITE = {
   name: 'Albergo Al Sole',
-  url: 'https://www.albergoalsolelusiana.it',
-  email: 'info@albergoalsolelusiana.it',
+  url: 'https://www.alsolelusiana.it',
+  email: 'info@alsolelusiana.it',
   phone: '0424 406004',
   phoneFull: '+390424406004',
   address: {
@@ -27,5 +27,5 @@ export const SITE = {
   priceRange: '€€',
   starRating: 3,
   heroImage: '/images/home/alsole__home.jpg',
-  ogImage: 'https://www.albergoalsolelusiana.it/images/home/alsole__home.jpg',
+  ogImage: 'https://www.alsolelusiana.it/images/home/alsole__home.jpg',
 } as const;

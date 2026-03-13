@@ -4,7 +4,7 @@
       <div ref="scrollSectionRef" class="scroll-section">
         <div ref="cardsContainerRef" class="cards-container">
           <div class="heading flex flex-col items-center justify-center mr-10">
-            <h2>Visualizza la nostra galleria</h2>
+            <h2>Le foto del nostro albergo</h2>
             <NuxtLink to="/gallery">
               <UButton class="rounded-full px-6">
                 Vai alla galleria completa
@@ -14,7 +14,7 @@
           <div ref="cardRefs" class="card" v-for="n in 4" :key="n">
             <NuxtImg
               src="/images/home/alsole__home.jpg"
-              :alt="`Albergo Al Sole - foto ${n}`"
+              :alt="`${SITE.name} - Hotel a Lusiana Conco, Altopiano di Asiago - foto ${n}`"
               class="w-full h-full object-cover"
               loading="lazy"
               width="400"
@@ -28,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+import { SITE } from '~/constants/site';
+
 const scrollSectionRef = ref<HTMLElement | null>(null);
 const cardsContainerRef = ref<HTMLElement | null>(null);
 

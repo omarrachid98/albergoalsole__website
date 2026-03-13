@@ -91,7 +91,7 @@ export default defineEventHandler(async (event) => {
 
   // Get SMTP config from runtime
   const config = useRuntimeConfig();
-  const { smtpHost, smtpPort, smtpUser, smtpPass, smtpFrom, smtpTo } = config;
+  const { smtpHost, smtpPort, smtpUser, smtpPass, smtpTo } = config;
 
   // Check if SMTP is configured
   if (!smtpHost || !smtpUser || !smtpPass) {
@@ -154,7 +154,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     await transporter.sendMail({
-      from: `"Albergo Al Sole - Sito Web" <${smtpFrom}>`,
+      from: "Albergo Al Sole - Sito Web",
       to: smtpTo,
       replyTo: email,
       subject: `Nuova richiesta da ${safeName} ${safeSurname}`,
