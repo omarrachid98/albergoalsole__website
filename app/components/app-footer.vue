@@ -11,6 +11,7 @@ import { SITE } from '~/constants/site';
         <h3 class="text-2xl font-bold mb-4 italic text-white">{{ SITE.name }}</h3>
         <p class="text-white">Hotel e ristorante a {{ SITE.address.locality }}, sull'Altopiano di Asiago. Dal {{ SITE.since }}, accoglienza e comfort tra le Prealpi Venete.</p>
         <p class="mt-2 text-white/70">&copy; {{ new Date().getFullYear() }} {{ SITE.name }}. Tutti i diritti riservati.</p>
+        <p class="mt-1 text-white/70 text-sm">P.IVA 03275120248</p>
       </div>
 
       <!-- Contatti -->
