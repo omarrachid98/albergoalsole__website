@@ -3,48 +3,47 @@
 
 @theme {
     --font-sans: 'Nunito', sans-serif;
+    --color-brand: #CC7722;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    @apply bg-gray-50;
 }
 
 .custom-container {
     @apply max-w-[1440px] mx-auto px-4;
 }
-* {
-    box-sizing: border-box;
-}
-body, html {
-    @apply bg-gray-50;
-}
-
-.nuxt-ui-component {
-    background-color: transparent !important;
-}
 
 h1, h2 {
-    @apply text-center text-3xl text-black italic mb-8
+    @apply text-center text-3xl text-black italic mb-8;
 }
 
 p {
-    @apply leading-relaxed text-black font-normal;
+    @apply leading-relaxed font-normal;
 }
 
-footer {
-    @apply bg-gray-200 w-full p-10;
+/* ─── Bubble glass utilities ─── */
+.glass {
+    @apply bg-white/60 backdrop-blur-md border border-white/30;
 }
 
-.footer-cols {
-    @apply w-full flex flex-col items-center justify-center h-full;
+.glass-strong {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
 }
 
-.container-glass {
-    @apply bg-white/30 backdrop-blur-md rounded-xl shadow-lg p-6;
+.bubble {
+    @apply rounded-3xl;
 }
 
-.contacts-us-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.bubble-pill {
+    @apply rounded-full;
 }
 
+/* ─── Form ─── */
 .uInput {
     @apply w-full;
 }
@@ -57,6 +56,7 @@ footer {
     @apply flex flex-col items-center justify-start gap-5;
 }
 
+/* ─── Horizontal scroll gallery ─── */
 .scroll-section {
     @apply relative overflow-hidden;
 }
@@ -73,16 +73,16 @@ footer {
     height: 70%;
     flex: 1 0 50%;
     margin-right: 50px;
-    border-radius: 14px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
 }
 
-img {
+.card img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: inherit;
 }
 
 .card:last-child {
@@ -102,11 +102,11 @@ img {
         height: 50%;
     }
 
-    .heading h1 {
+    .heading h2 {
         margin: 0 30px 0 10px;
     }
 
-    card:nth-child(3) img {
+    .card:nth-child(3) img {
         object-position: 30% 50%;
     }
 }
@@ -119,8 +119,7 @@ img {
         margin-right: 20px;
     }
 
-    .heading h1 {
+    .heading h2 {
         margin: 0 20px 0 5px;
     }
 }
-

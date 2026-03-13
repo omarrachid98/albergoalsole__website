@@ -1,13 +1,13 @@
 export interface ServicesTypes {
-    id: number;
-    title: string;
-    description: string;
+  id: number;
+  title: string;
+  description: string;
+  icon?: string;
 }
 
 export interface ContactsFormTypes {
-    name: string;
-    email: string;
-    surname: string;
-    //tel
-    message: string;
+  name: string;
+  email: string;
+  surname: string;
+  message: string;
 }

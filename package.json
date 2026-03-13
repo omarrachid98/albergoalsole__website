@@ -14,8 +14,10 @@
     "@nuxt/icon": "^2.1.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.0.0",
+    "@nuxtjs/sitemap": "^7.6.0",
     "@tailwindcss/vite": "^4.1.13",
     "gsap": "^3.13.0",
+    "nodemailer": "^8.0.2",
     "nuxt": "^4.1.2",
     "tailwindcss": "^4.1.13",
     "valibot": "^1.1.0",
@@ -23,6 +25,10 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.11"
+  },
+  "overrides": {
+    "serialize-javascript": "^7.0.4"
   }
 }

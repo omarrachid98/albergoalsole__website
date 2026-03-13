@@ -1,5 +1,20 @@
 export default defineAppConfig({
     ui: {
+        colors: {
+            primary: 'amber',
+            neutral: 'zinc',
+        },
+        input: {
+            slots: {
+                root: 'w-full',
+            },
+        },
+        textarea: {
+            slots: {
+                root: 'w-full',
+                base: 'w-full text-base p-3 rounded-lg',
+            },
+        },
         checkbox: {
             slots: {
                 label: 'text-black font-medium'
@@ -13,10 +28,5 @@ export default defineAppConfig({
                 error: 'mt-1 text-sm text-red-600',
             },
         },
-        textarea: {
-            slots: {
-                base: 'w-full text-base p-3 rounded-lg border border-gray-300',
-            }
-        }
     }
 });
