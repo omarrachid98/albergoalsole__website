@@ -129,25 +129,32 @@ export default defineEventHandler(async (event) => {
   const safeMessage = escapeHtml(message);
 
   const htmlBody = `
-    <div style="font-family: 'Nunito', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <div style="background: linear-gradient(135deg, #CC7722, #e8943a); padding: 30px; border-radius: 24px 24px 0 0; text-align: center;">
-        <h1 style="color: white; margin: 0; font-style: italic;">Albergo Al Sole</h1>
-        <p style="color: rgba(255,255,255,0.85); margin: 5px 0 0;">Nuova richiesta di contatto</p>
+    <div style="font-family: Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #f9fafb; border-radius: 16px; overflow: hidden;">
+      <!-- Header brand -->
+      <div style="background: #CC7722; padding: 24px 28px; text-align: center;">
+        <p style="margin: 0; font-size: 22px; font-weight: bold; font-style: italic; color: white; letter-spacing: 0.5px;">Albergo Al Sole</p>
       </div>
-      <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 24px 24px; border: 1px solid #e5e7eb; border-top: none;">
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr>
-            <td style="padding: 8px 0; font-weight: bold; color: #374151; width: 120px;">Nome:</td>
-            <td style="padding: 8px 0; color: #4b5563;">${safeName} ${safeSurname}</td>
-          </tr>
-          <tr>
-            <td style="padding: 8px 0; font-weight: bold; color: #374151;">Email:</td>
-            <td style="padding: 8px 0;"><a href="mailto:${safeEmail}" style="color: #CC7722;">${safeEmail}</a></td>
-          </tr>
-        </table>
-        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-        <p style="font-weight: bold; color: #374151; margin-bottom: 8px;">Messaggio:</p>
-        <p style="color: #4b5563; line-height: 1.6; white-space: pre-wrap;">${safeMessage}</p>
+
+      <!-- Body -->
+      <div style="padding: 28px;">
+        <p style="margin: 0 0 20px; font-size: 13px; color: #888;">Nuova richiesta dal sito web</p>
+
+        <!-- Mittente card -->
+        <div style="background: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; border: 1px solid #e5e7eb;">
+          <p style="margin: 0 0 4px; font-size: 16px; font-weight: bold; color: #1a1a1a;">${safeName} ${safeSurname}</p>
+          <a href="mailto:${safeEmail}" style="font-size: 14px; color: #CC7722; text-decoration: none;">${safeEmail}</a>
+        </div>
+
+        <!-- Messaggio card -->
+        <div style="background: white; border-radius: 12px; padding: 16px 20px; border: 1px solid #e5e7eb;">
+          <p style="margin: 0 0 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #CC7722;">Messaggio</p>
+          <p style="margin: 0; font-size: 14px; color: #333; line-height: 1.7; white-space: pre-wrap;">${safeMessage}</p>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding: 0 28px 20px; text-align: center;">
+        <p style="margin: 0; font-size: 11px; color: #bbb;">alsolelusiana.it</p>
       </div>
     </div>
   `;
