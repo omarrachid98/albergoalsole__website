@@ -133,28 +133,42 @@ export default defineEventHandler(async (event) => {
       <!-- Header brand -->
       <div style="background: #CC7722; padding: 24px 28px; text-align: center;">
         <p style="margin: 0; font-size: 22px; font-weight: bold; font-style: italic; color: white; letter-spacing: 0.5px;">Albergo Al Sole</p>
+        <p style="margin: 6px 0 0; font-size: 13px; color: rgba(255,255,255,0.8);">Hotel e Ristorante &bull; Lusiana Conco</p>
       </div>
 
       <!-- Body -->
       <div style="padding: 28px;">
-        <p style="margin: 0 0 20px; font-size: 13px; color: #888;">Nuova richiesta dal sito web</p>
 
-        <!-- Mittente card -->
-        <div style="background: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; border: 1px solid #e5e7eb;">
-          <p style="margin: 0 0 4px; font-size: 16px; font-weight: bold; color: #1a1a1a;">${safeName} ${safeSurname}</p>
-          <a href="mailto:${safeEmail}" style="font-size: 14px; color: #CC7722; text-decoration: none;">${safeEmail}</a>
+        <!-- Info card -->
+        <div style="background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; border: 1px solid #e5e7eb;">
+          <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+            <tr>
+              <td style="padding: 6px 0; font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; width: 70px; vertical-align: top;">Nome</td>
+              <td style="padding: 6px 0; font-size: 15px; color: #1a1a1a; font-weight: bold;">${safeName} ${safeSurname}</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 0; font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">Email</td>
+              <td style="padding: 6px 0; font-size: 15px;"><a href="mailto:${safeEmail}" style="color: #CC7722; text-decoration: none;">${safeEmail}</a></td>
+            </tr>
+          </table>
         </div>
 
         <!-- Messaggio card -->
-        <div style="background: white; border-radius: 12px; padding: 16px 20px; border: 1px solid #e5e7eb;">
-          <p style="margin: 0 0 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #CC7722;">Messaggio</p>
-          <p style="margin: 0; font-size: 14px; color: #333; line-height: 1.7; white-space: pre-wrap;">${safeMessage}</p>
+        <div style="background: white; border-radius: 12px; padding: 20px 24px; border: 1px solid #e5e7eb;">
+          <p style="margin: 0 0 12px; font-size: 12px; color: #CC7722; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Messaggio</p>
+          <p style="margin: 0; font-size: 14px; color: #333; line-height: 1.8; white-space: pre-wrap;">${safeMessage}</p>
         </div>
+
       </div>
 
       <!-- Footer -->
-      <div style="padding: 0 28px 20px; text-align: center;">
-        <p style="margin: 0; font-size: 11px; color: #bbb;">alsolelusiana.it</p>
+      <div style="padding: 0 28px 24px; text-align: center;">
+        <p style="margin: 0 0 4px; font-size: 12px; color: #999;">Albergo Al Sole &bull; Via VII Comuni 2, Lusiana Conco (VI)</p>
+        <p style="margin: 0; font-size: 12px;">
+          <a href="tel:+390424406004" style="color: #CC7722; text-decoration: none;">0424 406004</a>
+          &nbsp;&bull;&nbsp;
+          <a href="https://www.alsolelusiana.it" style="color: #CC7722; text-decoration: none;">alsolelusiana.it</a>
+        </p>
       </div>
     </div>
   `;
