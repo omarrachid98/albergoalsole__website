@@ -108,41 +108,23 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     :class="[
       'sticky top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out hidden md:block',
       scrolled
-        ? 'w-[800px] max-w-[800px] top-5 mx-auto mt-4 rounded-full bg-white/60 backdrop-blur-md py-2 px-6 border border-white/30 shadow-xl'
+        ? 'top-5 mx-auto mt-4 w-full max-w-[900px] px-4'
         : 'w-full bg-transparent px-4 py-6'
     ]"
   >
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <NuxtLink
-          to="/"
-          ref="logoRef"
-          class="tracking-wide font-bold italic transition-all duration-500 text-black"
-          :class="[scrolled ? 'text-base' : 'text-xl']"
-        >
-          {{ SITE.name }}
-        </NuxtLink>
-
-        <!-- Location pin (visible only when scrolled) -->
-        <a
-          v-if="scrolled"
-          :href="SITE.mapsUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Dove siamo - Lusiana Conco"
-          class="flex items-center gap-1 text-xs text-gray-500 hover:text-brand transition-colors"
-        >
-          <Icon name="uil:map-marker" size="14" aria-hidden="true" />
-          <span>{{ SITE.address.locality }}</span>
-        </a>
-      </div>
+    <!-- Non-scrolled: single row -->
+    <div v-if="!scrolled" class="flex items-center justify-between">
+      <NuxtLink
+        to="/"
+        ref="logoRef"
+        class="tracking-wide font-bold italic text-xl text-black transition-all duration-500"
+      >
+        {{ SITE.name }}
+      </NuxtLink>
 
       <nav
         aria-label="Navigazione principale"
-        :class="[
-          'flex gap-6 font-medium text-sm transition-all duration-500',
-          scrolled ? 'text-gray-900' : 'text-gray-800'
-        ]"
+        class="flex gap-6 font-medium text-sm text-gray-800 transition-all duration-500"
       >
         <NuxtLink
           v-for="item in menuItems"
@@ -154,6 +136,48 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
           {{ item.title }}
         </NuxtLink>
       </nav>
+    </div>
+
+    <!-- Scrolled: 3 separate glass bubbles -->
+    <div v-else class="flex items-center justify-between gap-3">
+      <!-- Bubble 1: Logo -->
+      <NuxtLink
+        to="/"
+        class="bg-white/60 backdrop-blur-md rounded-full shadow-xl border border-white/30 px-6 py-2.5
+          tracking-wide font-bold italic text-base text-black transition-all duration-300 hover:bg-white/80"
+      >
+        {{ SITE.name }}
+      </NuxtLink>
+
+      <!-- Bubble 2: Navigation -->
+      <nav
+        aria-label="Navigazione principale"
+        class="bg-white/60 backdrop-blur-md rounded-full shadow-xl border border-white/30 px-6 py-2.5
+          flex gap-6 font-medium text-sm text-gray-900 transition-all duration-300"
+      >
+        <NuxtLink
+          v-for="item in menuItems"
+          :key="item.url"
+          :to="item.url"
+          class="transition-colors hover:text-black"
+          exact-active-class="text-black font-bold underline"
+        >
+          {{ item.title }}
+        </NuxtLink>
+      </nav>
+
+      <!-- Bubble 3: Location -->
+      <a
+        :href="SITE.mapsUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Dove siamo - Lusiana Conco"
+        class="bg-white/60 backdrop-blur-md rounded-full shadow-xl border border-white/30 px-5 py-2.5
+          flex items-center gap-1.5 text-sm text-gray-700 hover:text-brand hover:bg-white/80 transition-all duration-300"
+      >
+        <Icon name="uil:map-marker" size="16" class="text-brand" aria-hidden="true" />
+        <span class="font-medium">{{ SITE.address.locality }}</span>
+      </a>
     </div>
   </header>
 

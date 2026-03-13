@@ -154,7 +154,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     await transporter.sendMail({
-      from: "Albergo Al Sole - Sito Web",
+      from: `"Albergo Al Sole - Sito Web" ${email}}`,
       to: smtpTo,
       replyTo: email,
       subject: `Nuova richiesta da ${safeName} ${safeSurname}`,

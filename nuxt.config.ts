@@ -38,7 +38,6 @@ export default defineNuxtConfig({
     smtpPort: Number(process.env.SMTP_PORT) || 587,
     smtpUser: process.env.SMTP_USER || '',
     smtpPass: process.env.SMTP_PASS || '',
-    smtpFrom: process.env.SMTP_FROM || 'noreply@alsolelusiana.it',
     smtpTo: process.env.SMTP_TO || 'info@alsolelusiana.it',
   },
 });

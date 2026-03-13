@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- Hero con bordi morbidi -->
-    <div class="relative w-full h-96 md:h-[500px] lg:h-[700px] overflow-hidden rounded-b-2xl">
+    <!-- Hero -->
+    <div class="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
       <NuxtImg
         :src="SITE.heroImage"
         :alt="`${SITE.name} - Hotel e ristorante a ${SITE.address.locality}, Altopiano di Asiago`"
@@ -10,7 +10,33 @@
         width="1200"
         height="800"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-gray-50/60 to-transparent" />
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/40" />
+      <!-- Bottom fade to page background -->
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-50 to-transparent" />
+
+      <!-- Hero content -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <h1 class="sr-only">{{ SITE.name }} - Hotel e ristorante a {{ SITE.address.locality }}</h1>
+        <p class="text-2xl md:text-4xl lg:text-5xl font-bold underline italic text-white drop-shadow-lg max-w-2xl leading-tight">
+          Hotel e ristorante a {{ SITE.address.locality }}, sull'Altopiano di Asiago.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-3">
+          <a
+            href="#contatti"
+            @click.prevent="scrollToContatti"
+            class="bg-brand hover:bg-brand/90 text-white font-semibold px-10 py-4 text-lg rounded-full shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+          >
+            Contattaci
+          </a>
+          <NuxtLink
+            to="/gallery"
+            class="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white font-semibold px-10 py-4 text-lg rounded-full border border-white/30 shadow-lg transition-all duration-300 hover:scale-105"
+          >
+            Scopri l'hotel
+          </NuxtLink>
+        </div>
+      </div>
     </div>
 
     <div class="custom-container my-10">
@@ -18,14 +44,20 @@
       <FeaturesOurServices />
       <FeaturesImageGallery />
 
-      <h2>Contatta il nostro hotel per prenotazioni e informazioni</h2>
-      <FeaturesContactsUs />
+      <div id="contatti">
+        <h2>Contatta il nostro hotel per prenotazioni e informazioni</h2>
+        <FeaturesContactsUs />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { SITE } from '~/constants/site';
+
+  const scrollToContatti = () => {
+    document.getElementById('contatti')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useSeoMeta({
     title: `${SITE.name} | Hotel e Ristorante a ${SITE.address.locality} - Altopiano di Asiago`,
