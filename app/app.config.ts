@@ -4,6 +4,11 @@ export default defineAppConfig({
             primary: 'amber',
             neutral: 'zinc',
         },
+        toaster: {
+            defaultVariants: {
+                position: 'top-center',
+            },
+        },
         input: {
             slots: {
                 root: 'w-full',

@@ -25,6 +25,13 @@
   // Honeypot field (hidden from users, bots fill it in)
   const honeypot = ref('');
 
+  const fieldLabels: Record<string, string> = {
+    name: 'Nome',
+    surname: 'Cognome',
+    email: 'Email',
+    message: 'Messaggio',
+  };
+
   const validateForm = (state: Partial<Schema>): FormError[] => {
     const errors: FormError[] = [];
     const fields = ['name', 'surname', 'email', 'message'] as const;
@@ -34,6 +41,20 @@
       }
     }
     return errors;
+  };
+
+  const showValidationToast = () => {
+    const fields = ['name', 'surname', 'email', 'message'] as const;
+    const missing = fields.filter((key) => !formData[key]?.trim());
+
+    if (missing.length > 0) {
+      const labels = missing.map((key) => fieldLabels[key]);
+      toast.add({
+        title: 'Campi obbligatori mancanti!',
+        description: labels.join(', '),
+        color: 'error',
+      });
+    }
   };
 
   const resetForm = () => {
@@ -137,6 +158,7 @@
         size="xl"
         :loading="loading"
         :disabled="loading"
+        @click="showValidationToast"
       >
         {{ loading ? 'Invio in corso...' : 'Invia messaggio' }}
       </UButton>
