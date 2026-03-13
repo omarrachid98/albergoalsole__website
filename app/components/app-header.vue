@@ -185,7 +185,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
           aria-label="Contattaci"
           class="backdrop-blur-md cursor-pointer bg-white/70 px-4 py-2 rounded-full shadow-lg"
         >
-          <Icon name="uil:envelopes" size="20" class="text-black" aria-hidden="true" />
+          <Icon name="uil:envelopes" size="20" class="text-brand" aria-hidden="true" />
         </NuxtLink>
       </div>
     </div>
@@ -200,7 +200,7 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       aria-label="Menu di navigazione"
       class="backdrop-blur-md bg-white/70 border border-white/30 cursor-pointer
         shadow-xl transition-all duration-300 flex items-center justify-center
-        text-black"
+        text-brand"
       :class="[isMenuOpen ? 'w-16 h-16 rounded-2xl' : 'w-16 h-16 rounded-full']"
     >
       <span v-if="!isMenuOpen" class="text-3xl leading-none">&#9776;</span>
