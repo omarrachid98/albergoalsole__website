@@ -174,9 +174,9 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     <div class="flex items-center justify-start w-full px-4 gap-2">
       <NuxtLink
         to="/"
-        class="backdrop-blur-md bg-white/70 px-6 py-2 rounded-full shadow-lg"
+        class="backdrop-blur-md bg-white/70 px-5 py-2 rounded-full shadow-lg shrink-0"
       >
-        <p class="text-lg font-bold italic text-center text-gray-900">{{ SITE.name }}</p>
+        <p class="text-base font-bold italic text-center text-gray-900">{{ SITE.name }}</p>
       </NuxtLink>
 
       <div class="ml-auto flex items-center gap-2">
@@ -185,16 +185,23 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Dove siamo - Lusiana Conco"
-          class="backdrop-blur-md bg-white/70 px-4 py-2 rounded-full shadow-lg flex items-center gap-1.5"
+          class="backdrop-blur-md bg-white/70 px-3 py-2 rounded-full shadow-lg"
         >
           <Icon name="uil:map-marker" size="20" class="text-brand" aria-hidden="true" />
-          <span class="text-sm font-medium text-gray-900 hidden min-[400px]:inline">Dove siamo</span>
+        </a>
+
+        <a
+          :href="`tel:${SITE.phoneFull}`"
+          aria-label="Chiama"
+          class="backdrop-blur-md bg-white/70 px-3 py-2 rounded-full shadow-lg"
+        >
+          <Icon name="uil:phone" size="20" class="text-brand" aria-hidden="true" />
         </a>
 
         <NuxtLink
           to="/contact-us"
           aria-label="Contattaci"
-          class="backdrop-blur-md cursor-pointer bg-white/70 px-4 py-2 rounded-full shadow-lg"
+          class="backdrop-blur-md cursor-pointer bg-white/70 px-3 py-2 rounded-full shadow-lg"
         >
           <Icon name="uil:envelopes" size="20" class="text-brand" aria-hidden="true" />
         </NuxtLink>
