@@ -175,6 +175,12 @@
       >
         {{ loading ? 'Invio in corso...' : 'Invia messaggio' }}
       </UButton>
+      <p v-if="recaptchaSiteKey" class="text-xs text-gray-400 text-center leading-relaxed">
+        Protetto da reCAPTCHA di Google.
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-600">Privacy Policy</a>
+        e
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-600">Termini di Servizio</a>.
+      </p>
     </UForm>
   </div>
 </template>

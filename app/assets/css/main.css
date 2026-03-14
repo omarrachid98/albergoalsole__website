@@ -48,6 +48,11 @@ p {
     @apply w-full;
 }
 
+/* ─── reCAPTCHA v3: hide floating badge ─── */
+.grecaptcha-badge {
+    visibility: hidden !important;
+}
+
 .form-control {
     @apply flex flex-col items-start justify-start w-full;
 }

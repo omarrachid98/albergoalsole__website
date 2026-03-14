@@ -201,33 +201,47 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
       </div>
     </div>
   </div>
+  <!-- Mobile menu overlay -->
+  <Transition name="fade">
+    <div
+      v-if="isMenuOpen"
+      class="md:hidden fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
+      @click="onOpenMenu"
+    />
+  </Transition>
+
   <div class="md:hidden fixed bottom-6 right-6 z-50">
     <button
       ref="bubbleRef"
       @click="onOpenMenu"
       :aria-expanded="isMenuOpen"
       aria-label="Menu di navigazione"
-      class="backdrop-blur-md bg-white/70 border border-white/30 cursor-pointer
-        shadow-xl transition-all duration-300 flex items-center justify-center
-        text-brand"
-      :class="[isMenuOpen ? 'w-16 h-16 rounded-2xl' : 'w-16 h-16 rounded-full']"
+      class="w-14 h-14 rounded-full cursor-pointer
+        shadow-lg shadow-brand/25 transition-all duration-300
+        flex items-center justify-center"
+      :class="[
+        isMenuOpen
+          ? 'bg-white text-brand border border-gray-200'
+          : 'bg-brand text-white hover:shadow-xl hover:shadow-brand/30 hover:scale-105'
+      ]"
     >
-      <span v-if="!isMenuOpen" class="text-3xl leading-none">&#9776;</span>
-      <span v-else class="text-2xl leading-none">&#10005;</span>
+      <Icon v-if="!isMenuOpen" name="uil:bars" size="24" />
+      <Icon v-else name="uil:times" size="22" />
     </button>
     <nav
       v-if="isMenuOpen"
       ref="menuRef"
       aria-label="Menu mobile"
-      class="absolute bottom-20 right-0 w-48
-        bg-white/70 backdrop-blur-md rounded-2xl shadow-xl p-4 flex flex-col gap-3
-        border border-white/30"
+      class="absolute bottom-18 right-0 flex flex-col items-end gap-2.5"
     >
       <NuxtLink
         v-for="item in menuItems"
         :key="item.url"
         :to="item.url"
-        class="text-gray-800 hover:text-black font-medium transition-colors"
+        class="bg-white/80 backdrop-blur-md border border-white/40 rounded-full
+          shadow-lg px-5 py-2.5 w-36 text-center
+          text-gray-800 hover:text-brand font-semibold text-sm
+          transition-all duration-200 hover:scale-105 hover:shadow-xl"
         @click="isMenuOpen = false"
       >
         {{ item.title }}
@@ -235,3 +249,14 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
     </nav>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
