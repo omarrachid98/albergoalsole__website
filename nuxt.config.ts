@@ -32,6 +32,9 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
       ],
+      script: process.env.RECAPTCHA_SITE_KEY
+        ? [{ src: `https://www.google.com/recaptcha/api.js?render=${process.env.RECAPTCHA_SITE_KEY}`, async: true }]
+        : [],
     },
   },
 
@@ -41,5 +44,9 @@ export default defineNuxtConfig({
     smtpUser: process.env.SMTP_USER || '',
     smtpPass: process.env.SMTP_PASS || '',
     smtpTo: process.env.SMTP_TO || 'info@alsolelusiana.it',
+    recaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY || '',
+    public: {
+      recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY || '',
+    },
   },
 });

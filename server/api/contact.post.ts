@@ -51,10 +51,35 @@ const contactSchema = v.object({
   message: v.pipe(v.string(), v.minLength(1, 'Il messaggio è obbligatorio')),
   // Honeypot field: must be empty (bots fill it in)
   website: v.optional(v.pipe(v.string(), v.maxLength(0))),
+  // reCAPTCHA v3 token
+  recaptchaToken: v.optional(v.string()),
 });
 
+// Verify reCAPTCHA v3 token with Google API
+interface RecaptchaResponse {
+  success: boolean;
+  score?: number;
+  action?: string;
+  'error-codes'?: string[];
+}
+
+async function verifyRecaptcha(token: string, secretKey: string): Promise<{ success: boolean; score: number }> {
+  const response = await $fetch<RecaptchaResponse>('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      secret: secretKey,
+      response: token,
+    }).toString(),
+  });
+
+  return {
+    success: response.success === true,
+    score: response.score ?? 0,
+  };
+}
+
 export default defineEventHandler(async (event) => {
-  // Rate limiting by IP
   const ip = getRequestIP(event, { xForwardedFor: true }) || 'unknown';
   if (!checkRateLimit(ip)) {
     throw createError({
@@ -63,7 +88,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Parse and validate request body
   const body = await readBody(event);
 
   const result = v.safeParse(contactSchema, body);
@@ -78,9 +102,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Honeypot: if the hidden 'website' field has a value, it's a bot
   if (result.output.website) {
-    // Silently return success to not tip off the bot
     return {
       success: true,
       message: 'Messaggio inviato con successo!',
@@ -89,15 +111,33 @@ export default defineEventHandler(async (event) => {
 
   const { name, surname, email, message } = result.output;
 
-  // Get SMTP config from runtime
   const config = useRuntimeConfig();
+  const { recaptchaSecretKey } = config;
+
+  if (recaptchaSecretKey) {
+    const token = result.output.recaptchaToken;
+    if (!token) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Verifica reCAPTCHA mancante. Ricarica la pagina e riprova.',
+      });
+    }
+
+    const recaptchaResult = await verifyRecaptcha(token, recaptchaSecretKey);
+    if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
+      console.warn(`[reCAPTCHA] Verifica fallita - success: ${recaptchaResult.success}, score: ${recaptchaResult.score}, ip: ${ip}`);
+      throw createError({
+        statusCode: 403,
+        statusMessage: 'Verifica reCAPTCHA fallita. Riprova più tardi.',
+      });
+    }
+  }
+
   const { smtpHost, smtpPort, smtpUser, smtpPass, smtpTo } = config;
 
-  // Check if SMTP is configured
   if (!smtpHost || !smtpUser || !smtpPass) {
     console.warn('[SMTP] Non configurato. Dati del form ricevuti:', { name, surname, email });
 
-    // In development, return success without sending email
     if (process.dev) {
       return {
         success: true,
@@ -111,7 +151,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Create SMTP transporter
   const transporter = nodemailer.createTransport({
     host: smtpHost,
     port: smtpPort,
@@ -122,7 +161,6 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  // Build email HTML (escape user input to prevent XSS)
   const safeName = escapeHtml(name);
   const safeSurname = escapeHtml(surname);
   const safeEmail = escapeHtml(email);

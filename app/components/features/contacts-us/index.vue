@@ -4,6 +4,8 @@
   import type { FormError, FormSubmitEvent } from '@nuxt/ui';
   type Schema = v.InferOutput<typeof schema>;
 
+  const { public: { recaptchaSiteKey } } = useRuntimeConfig();
+
   const toast = useToast();
   const loading = ref(false);
   const submitted = ref(false);
@@ -22,7 +24,6 @@
     message: "",
   });
 
-  // Honeypot field (hidden from users, bots fill it in)
   const honeypot = ref('');
 
   const fieldLabels: Record<string, string> = {
@@ -67,9 +68,24 @@
   const onSubmit = async (_event: FormSubmitEvent<Schema>) => {
     loading.value = true;
     try {
+      let recaptchaToken = '';
+      if (recaptchaSiteKey && window.grecaptcha) {
+        try {
+          recaptchaToken = await window.grecaptcha.execute(recaptchaSiteKey, { action: 'contact' });
+        } catch {
+          toast.add({
+            title: 'Errore reCAPTCHA',
+            description: 'Impossibile verificare che non sei un robot. Ricarica la pagina e riprova.',
+            color: 'error',
+          });
+          loading.value = false;
+          return;
+        }
+      }
+
       await $fetch('/api/contact', {
         method: 'POST',
-        body: { ...formData, website: honeypot.value },
+        body: { ...formData, website: honeypot.value, recaptchaToken },
       });
 
       submitted.value = true;
